@@ -25,4 +25,6 @@ app.UseAuthorization();
 
 app.MapRazorPages();
 
+LdClient client = LDClient.Client;
+
 app.Run();
