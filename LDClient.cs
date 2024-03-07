@@ -12,7 +12,7 @@ public sealed class LDClient
     private LDClient()
     {
 
-        client = new LdClient("sdk-c511170a-a72e-48d9-8d16-5ef0270975f1");
+        client = new LdClient(Environment.GetEnvironmentVariable("LD_SDK_KEY"));
         client.FlagTracker.FlagChanged += (s, e) =>
         {
             Console.WriteLine("Here: \"{0}\"!", e.Key);
