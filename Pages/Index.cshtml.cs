@@ -24,8 +24,6 @@ public class IndexModel : PageModel
         .Name("Linux")
         .Build();
 
-        LDClient.Context = context;
-
         var flagValue = client.BoolVariation("test-flag", context, false);
         ViewData["flagval"] = flagValue;
     }

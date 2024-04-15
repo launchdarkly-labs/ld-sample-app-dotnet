@@ -41,28 +41,4 @@ public sealed class LDClient
             return Instance.client;
         }
     }
-
-    public static Context Context
-    {
-        set
-        {
-            Context c = value;
-            string flag = "test-flag";
-            LdClient client = Instance.client;
-            client.FlagTracker.FlagChanged += client.FlagTracker.FlagValueChangeHandler(
-                flag,
-                c,
-                (s, e) =>
-                {
-                    Console.WriteLine(
-                        "Flag \"{0}\" for context \"{1}\" has changed from {2} to {3}",
-                        flag,
-                        c.Key,
-                        e.OldValue,
-                        e.NewValue
-                    );
-                }
-            );
-        }
-    }
 }
