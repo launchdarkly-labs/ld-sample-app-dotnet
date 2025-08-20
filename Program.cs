@@ -2,11 +2,15 @@ using System.Diagnostics;
 using System.Text;
 using LaunchDarkly.Sdk;
 using LaunchDarkly.Sdk.Server;
+using System.IO;
+using DotEnv.Core;
+
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddRazorPages();
+builder.Services.AddControllers();
 
 var app = builder.Build();
 
@@ -18,36 +22,42 @@ if (!app.Environment.IsDevelopment())
     app.UseHsts();
 }
 
-app.UseHttpsRedirection();
 app.UseStaticFiles();
-
 app.UseRouting();
-
 app.UseAuthorization();
-
 app.MapRazorPages();
+app.MapControllers();
 
-LdClient client = LDClient.Client;
+new EnvLoader().Load(); // Loads the .env file
 
-string flag = "test-flag";
-var context = Context.Builder("018d6ae1-d3c8-704b-8b12-6a8ce650ef5e")
-.Kind("device")
-.Name("Linux")
-.Build();
+var reader = new EnvReader();
+string clientKey = reader["LD_CLIENT_KEY"];
+string filePath = "wwwroot/js/keys.js";
+string content = $"const clientKey = \"{clientKey}\";";
 
-client.FlagTracker.FlagChanged += client.FlagTracker.FlagValueChangeHandler(
-    flag,
-    context,
-    (s, e) =>
-    {
-        Console.WriteLine(
-            "Flag \"{0}\" for context \"{1}\" has changed from {2} to {3}",
-            flag,
-            context.Key,
-            e.OldValue,
-            e.NewValue
-        );
-    }
-);
+File.WriteAllText(filePath, content);
+
+// LdClient client = LDClient.Client;
+
+// string flag = "test-flag";
+// var context = Context.Builder("018d6ae1-d3c8-704b-8b12-6a8ce650ef5e")
+// .Kind("device")
+// .Name("Linux")
+// .Build();
+
+// client.FlagTracker.FlagChanged += client.FlagTracker.FlagValueChangeHandler(
+//     flag,
+//     context,
+//     (s, e) =>
+//     {
+//         Console.WriteLine(
+//             "Flag \"{0}\" for context \"{1}\" has changed from {2} to {3}",
+//             flag,
+//             context.Key,
+//             e.OldValue,
+//             e.NewValue
+//         );
+//     }
+// );
 
 app.Run();

@@ -2,6 +2,7 @@ using LaunchDarkly.Sdk;
 using LaunchDarkly.Sdk.Server;
 using LaunchDarkly.Sdk.Server.Interfaces;
 using LaunchDarkly.Sdk.Server.Subsystems;
+using DotEnv.Core;
 
 public sealed class LDClient
 {
@@ -12,7 +13,11 @@ public sealed class LDClient
     private LDClient()
     {
 
-        client = new LdClient(Environment.GetEnvironmentVariable("LD_SDK_KEY"));
+        new EnvLoader().Load(); // Loads the .env file
+
+        var reader = new EnvReader();
+        string sdkKey = reader["LD_SDK_KEY"];
+        client = new LdClient(sdkKey);
         client.FlagTracker.FlagChanged += (s, e) =>
         {
             Console.WriteLine("Here: \"{0}\"!", e.Key);

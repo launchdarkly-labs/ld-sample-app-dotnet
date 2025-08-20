@@ -2,50 +2,60 @@
 <html lang="en">
 
 <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - dotnetapp</title>
-    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
-    <link rel="stylesheet" href="~/dotnetapp.styles.css" asp-append-version="true" />
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>@ViewData["Title"] • Coffee Supply Co.</title>
+    <meta name="description"
+        content="Wholesale supplies for local coffee shops—beans, cups, grinders, espresso machines, syrups and more.">
+    <script crossorigin="anonymous" src="https://cdn.jsDelivr.net/npm/launchdarkly-js-client-sdk@3.8.1"></script>
+    <link rel="stylesheet" href="~/css/styles.css">
+    <script src="~/js/keys.js"></script>
+    <script src="~/js/ld.js"></script>
 </head>
 
 <body>
-    <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-            <div class="container">
-                <a class="navbar-brand" asp-area="" asp-page="/Index">Simple .NET App</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse"
-                    aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                    <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-page="/Index">Home</a>
-                        </li>
-                    </ul>
+
+    <header class="header">
+        <div class="container nav">
+            <a class="brand" href="/" aria-label="Coffee Supply Co. Home">
+                <span class="logo" aria-hidden="true"></span>
+                <div>
+                    <span class="title">Coffee Supply Co.</span>
+                    <span class="subtitle">Wholesale Essentials</span>
+                </div>
+            </a>
+            <button class="nav-toggle" aria-label="Toggle navigation">Menu</button>
+            <ul role="menubar" aria-label="Primary">
+                <li role="none"><a role="menuitem" href="/" style="background: rgba(163,90,43,.08);">Home</a>
+                </li>
+                <li role="none"><a role="menuitem" href="/about">About</a></li>
+                <li role="none"><a role="menuitem" href="/products">Products</a></li>
+                <li role="none"><a role="menuitem" href="/contact">Contact</a></li>
+            </ul>
+        </div>
+    </header>
+    @RenderBody()
+    <footer class="footer">
+        <div class="container">
+            <div class="grid">
+                <div class="card" style="grid-column: span 6;">
+                    <h3>Serving Local Cafés</h3>
+                    <p class="muted">We deliver quality supplies on time so you can focus on delighting guests.</p>
+                </div>
+                <div class="card" style="grid-column: span 3;">
+                    <h3>Contact</h3>
+                    <p class="muted">hello@coffeesupply.example<br /> (555) 123-4567</p>
+                </div>
+                <div class="card" style="grid-column: span 3;">
+                    <h3>Hours</h3>
+                    <p class="muted">Mon–Fri 8:00–6:00<br />Sat 9:00–1:00</p>
                 </div>
             </div>
-        </nav>
-    </header>
-    <div class="container">
-        <main role="main" class="pb-3">
-            @RenderBody()
-        </main>
-    </div>
-
-    <footer class="border-top footer text-muted">
-        <div class="container">
-            &copy; 2024 - dotnetapp - <a asp-area="" asp-page="/Privacy">Privacy</a>
+            <div class="spacer"></div>
+            <small>© 2025 Coffee Supply Co. • Built with love (and caffeine).</small>
         </div>
+        <script src="~/js/script.js" defer></script>
     </footer>
-
-    <script src="~/lib/jquery/dist/jquery.min.js"></script>
-    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="~/js/site.js" asp-append-version="true"></script>
-
-    @await RenderSectionAsync("Scripts", required: false)
 </body>
 
 </html>
