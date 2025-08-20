@@ -26,11 +26,11 @@
             </a>
             <button class="nav-toggle" aria-label="Toggle navigation">Menu</button>
             <ul role="menubar" aria-label="Primary">
-                <li role="none"><a role="menuitem" href="/" style="background: rgba(163,90,43,.08);">Home</a>
+                <li role="none"><a role="menuitem" href="/"@(((string)ViewData["CurrentPath"] == "/") ? " style=background:rgba(163,90,43,.08);" : "")>Home</a>
                 </li>
-                <li role="none"><a role="menuitem" href="/about">About</a></li>
-                <li role="none"><a role="menuitem" href="/products">Products</a></li>
-                <li role="none"><a role="menuitem" href="/contact">Contact</a></li>
+                <li role="none"><a role="menuitem" href="/about"@(((string)ViewData["CurrentPath"] == "/about") ? " style=background:rgba(163,90,43,.08);" : "")>About</a></li>
+                <li role="none"><a role="menuitem" href="/products"@(((string)ViewData["CurrentPath"] == "/products") ? " style=background:rgba(163,90,43,.08);" : "")>Products</a></li>
+                <li role="none"><a role="menuitem" href="/contact"@(((string)ViewData["CurrentPath"] == "/contact") ? " style=background:rgba(163,90,43,.08);" : "")>Contact</a></li>
             </ul>
         </div>
     </header>

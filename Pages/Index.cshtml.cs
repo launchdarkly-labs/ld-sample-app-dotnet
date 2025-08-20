@@ -17,6 +17,10 @@ public class IndexModel : PageModel
 
     public void OnGet()
     {
+        var currentPath = Request.Path.Value;
+        var currentRouteUrl = Url.RouteUrl(RouteData.Values);
+        ViewData["CurrentPath"] = currentPath;
+        ViewData["CurrentRouteUrl"] = currentRouteUrl;
 
         LdClient client = LDClient.Client;
 
